@@ -4,7 +4,7 @@
 executor_module = "brmangue.executor"
 name    = "brmangue"
 class   = "brmangue"
-package = "git+https://github.com/dissmodel/brmangue-dissmodel@v0.1.0"
+package = "git+https://github.com/dissmodel/brmangue-dissmodel@develop"
 
 [model.parameters]
 end_time      = 88
