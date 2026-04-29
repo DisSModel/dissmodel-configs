@@ -3,7 +3,7 @@
 executor_module = "disslucc.infra.executors" 
 name  = "lucc_vector"
 class = "lucc_vector"
-package = "git+https://github.com/dissmodel/disslucc-continuous@develop"
+package = "git+https://github.com/dissmodel/disslucc-continuous@v0.1.0"
 
 
 [model.parameters]
