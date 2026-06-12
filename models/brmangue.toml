@@ -2,9 +2,9 @@
 
 [model]
 executor_module = "brmangue.executor"
-name    = "brmangue"
-class   = "brmangue"
-package = "git+https://github.com/dissmodel/brmangue-dissmodel@v0.1.1"
+name    = "brmangue_raster"
+class   = "brmangue_raster"
+package = "git+https://github.com/dissmodel/brmangue-dissmodel@v0.2.0"
 
 [model.parameters]
 end_time      = 88
