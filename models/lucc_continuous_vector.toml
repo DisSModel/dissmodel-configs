@@ -1,15 +1,14 @@
+# configs/models/lucc_continuous_vector.toml
 
 [model]
-executor_module = "disslucc.infra.executors" 
-name  = "lucc_vector"
-class = "lucc_vector"
-package = "git+https://github.com/dissmodel/disslucc-continuous@v0.1.0"
+executor_module  = "disslucc_continuous.executors"
+name             = "lucc_vector"
+class            = "lucc_vector"
+description      = "LUCC continuous vector simulation (C-CLUE-like, linear regression potential)"
+package          = "git+https://github.com/DisSModel/disslucc-continuous@main"
+dissmodel        = ">=0.6.0,<0.7.0"
 
-
-[model.parameters]
-resolution = 5000.0
-n_steps    = 7
-
+# Model-level config read from spec (record.resolved_spec["model"]):
 land_use_types   = ["f", "d", "outros"]
 land_use_no_data = "outros"
 complementar_lu  = "f"
@@ -22,6 +21,11 @@ cols = ["assentamen", "uc_us", "uc_pi", "ti", "dist_riobr", "fertilidad", "rodov
 f      = -1
 d      = -1
 outros = 1
+
+# Runtime parameters (record.parameters).
+# demand_csv must be supplied at experiment time — no sensible default.
+[model.parameters]
+n_steps = 7
 
 [[model.potential]]
 lu    = "f"
@@ -49,24 +53,24 @@ lu    = "outros"
 const = 0.0
 
 [[model.allocation]]
-lu = "f"
-static = -1
+lu        = "f"
+static    = -1
 min_value = 0
 max_value = 1
 min_change = 0
 max_change = 1
 
 [[model.allocation]]
-lu = "d"
-static = -1
+lu        = "d"
+static    = -1
 min_value = 0
 max_value = 1
 min_change = 0
 max_change = 1
 
 [[model.allocation]]
-lu = "outros"
-static = 1
+lu        = "outros"
+static    = 1
 min_value = 0
 max_value = 1
 min_change = 0

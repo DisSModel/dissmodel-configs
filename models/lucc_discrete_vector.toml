@@ -1,0 +1,83 @@
+# configs/models/lucc_discrete_vector.toml
+# Reference dataset: cs_moju (Amazonia, 1999-2004, 6 steps).
+
+[model]
+executor_module = "disslucc_discrete.executors"
+name            = "clue_s_vector"
+class           = "clue_s_vector"
+description     = "LUCC discrete vector simulation (CLUE-S, logistic regression potential)"
+package         = "git+https://github.com/DisSModel/disslucc-discrete@main"
+dissmodel       = ">=0.6.0,<0.7.0"
+
+# Model-level config read from spec (record.resolved_spec["model"]):
+land_use_types = ["f", "d", "o"]
+region_attr    = "region"
+cell_area      = 1.0
+
+# Inline annual demand [f, d, o] per step (cs_moju, 1999-2004).
+# Override at experiment time via parameters.demand_csv if needed.
+annual_demand = [
+    [5706, 205, 3],
+    [5658, 253, 3],
+    [5611, 300, 3],
+    [5563, 348, 3],
+    [5516, 395, 3],
+    [5468, 443, 3],
+]
+
+# Runtime parameters (record.parameters).
+# demand_csv may be supplied at experiment time to override annual_demand above.
+[model.parameters]
+n_steps = 6
+
+# ── Potential ─────────────────────────────────────────────────────────────────
+
+[[model.potential]]
+# f — forest
+const      = -2.34187976925989
+elasticity = 0.0
+[model.potential.betas]
+media_decl = -0.0272710076327129
+dist_area_ =  4.30977432375496
+dist_br    =  3.10319957497883
+dist_curua =  0.445414024051873
+dist_rios_ = 47.3556329553235
+dist_estra = 38.4966894254506
+
+[[model.potential]]
+# d — deforestation
+const      = -0.100351497277102
+elasticity = 0.6
+[model.potential.betas]
+media_decl =  0.0581358851690861
+dist_area_ = -0.974998890251365
+dist_br    = -2.51650696123426
+dist_curua = -1.26742746441679
+dist_rios_ = -40.3646901047482
+dist_estra = -23.0841140199094
+
+[[model.potential]]
+# o — other (static via transition matrix)
+const      = 0.01
+elasticity = 0.5
+[model.potential.betas]
+
+# ── Allocation ────────────────────────────────────────────────────────────────
+
+[model.allocation]
+max_difference   = 10.0
+max_iteration    = 1000
+factor_iteration = 0.0001
+
+# ── Transition matrix ─────────────────────────────────────────────────────────
+# Shape: [region][from_lu][to_lu], values in {0, 1}.
+# Rows = from, cols = to (f, d, o).
+# f can become d; d is irreversible; o is static.
+[model.transition_matrix]
+data = [
+    [
+        [1, 1, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+    ]
+]
