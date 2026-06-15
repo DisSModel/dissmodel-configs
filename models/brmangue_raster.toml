@@ -2,8 +2,8 @@
 
 [model]
 executor_module = "brmangue.executors"
-name            = "raster_executor"
-class           = "raster_executor"
+name            = "brmangue_raster"
+class           = "brmangue_raster"
 description     = "BR-MANGUE raster simulation (mangrove + flood dynamics)"
 package         = "git+https://github.com/DisSModel/brmangue-dissmodel@refactoring"
 
