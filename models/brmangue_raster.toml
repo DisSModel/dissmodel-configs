@@ -1,0 +1,16 @@
+# configs/models/brmangue_raster.toml
+
+[model]
+executor_module = "brmangue.executors"
+name            = "brmangue_raster"
+class           = "brmangue_raster"
+description     = "BR-MANGUE raster simulation (mangrove + flood dynamics)"
+package         = "git+https://github.com/DisSModel/brmangue-dissmodel@main"
+
+[model.parameters]
+end_time      = 88
+taxa_elevacao = 0.5
+altura_mare   = 6.0
+acrecao_ativa = false
+resolution    = 100.0
+crs           = "EPSG:31983"
